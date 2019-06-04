@@ -70,6 +70,14 @@ function makeResponsive(){
         .attr("transform", `translate(0, ${height})`)
         .call(bottomAxis);
 
+      svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Income");  
+
       var circlesGroup = chartGroup.selectAll("circle")
         .data(cenData)
         .enter()
@@ -79,6 +87,20 @@ function makeResponsive(){
         .attr("r", 15)
         .attr("fill", "blue")
         .attr("opacity", ".5");
+
+        var fValue = (d) => {return d.state_abbr;};
+
+        chartGroup.selectAll()
+        .data(cenData)
+        .enter()
+        .append("text")
+        .attr("class", "state")
+        .attr("x", (d) => xLinearScale(d.obesity))
+        .attr("y", (d) => yLinearScale(d.income))
+        .attr("text-anchor", 'middle')
+        .style("fill", "white")
+        .text((d) => (d.abbr))
+
         
 
       // Step 1: Initialize Tooltip
