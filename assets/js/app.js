@@ -41,7 +41,7 @@ function makeResponsive(){
       // parse data
       cenData.forEach(function(data) {
         data.obesity = +data.obesity;
-        data.income = +data.income;
+        data.smokes = +data.smokes;
       });  
 
       console.log(cenData);
@@ -53,7 +53,7 @@ function makeResponsive(){
 
     // Create a linear scale for the vertical axis.
       var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(cenData, d => d.income)])
+      .domain([0, d3.max(cenData, d => d.smokes)])
       .range([height, 0]); 
 
     // Create two new functions passing our scales in as arguments
@@ -73,17 +73,24 @@ function makeResponsive(){
       svg.append("text")
         .attr("class", "y label")
         .attr("text-anchor", "end")
-        .attr("y", 6)
+        .attr("y", 0)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
-        .text("Income");  
+        .text("Smokes");  
+
+        svg.append("text")
+            .attr("class", "x label")
+            .attr("text-anchor", "end")
+            .attr("x", width)
+            .attr("y", height)
+            .text("Obesity");
 
       var circlesGroup = chartGroup.selectAll("circle")
         .data(cenData)
         .enter()
         .append("circle")
         .attr("cx", d => xLinearScale(d.obesity))
-        .attr("cy", d => yLinearScale(d.income))
+        .attr("cy", d => yLinearScale(d.smokes))
         .attr("r", 15)
         .attr("fill", "blue")
         .attr("opacity", ".5");
@@ -96,7 +103,7 @@ function makeResponsive(){
         .append("text")
         .attr("class", "state")
         .attr("x", (d) => xLinearScale(d.obesity))
-        .attr("y", (d) => yLinearScale(d.income))
+        .attr("y", (d) => yLinearScale(d.smokes))
         .attr("text-anchor", 'middle')
         .style("fill", "white")
         .text((d) => (d.abbr))
@@ -108,7 +115,7 @@ function makeResponsive(){
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`<strong> ${(d.state)}<hr> Obesity: ${(d.obesity)}<br/>Income: ${d.income}`);
+        return (`<strong> ${(d.state)}<hr> Obesity: ${(d.obesity)}<br/>smokes: ${d.smokes}`);
       });
 
       // Step 2: Create the tooltip in chartGroup.
