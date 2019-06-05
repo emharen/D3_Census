@@ -74,16 +74,21 @@ function makeResponsive(){
         .attr("class", "y label")
         .attr("text-anchor", "end")
         .attr("y", 0)
+        .attr("x", -50)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
+        .style("font-weight", 500)
         .text("Smokes (%)");  
+       
 
         svg.append("text")
             .attr("class", "x label")
             .attr("text-anchor", "end")
-            .attr("x", width)
-            .attr("y", height)
+            .attr("x", width- 100)
+            .attr("y", height + 70)
+            .style("font-weight", 500)
             .text("Obesity (%)");
+            
 
       var circlesGroup = chartGroup.selectAll("circle")
         .data(cenData)
@@ -113,10 +118,13 @@ function makeResponsive(){
       // Step 1: Initialize Tooltip
       var toolTip = d3.tip()
       .attr("class", "tooltip")
+      .style("background", "#dfebfd")
       .offset([80, -60])
       .html(function(d) {
-        return (`<strong> ${(d.state)}<hr> Obesity: ${(d.obesity)}<br/>Smokes: ${d.smokes}`);
-      });
+        return (`<strong> ${(d.state)}<hr> Obese: ${(d.obesity)}% <br/>Smokes: ${d.smokes}%`);
+      })
+      
+
 
       // Step 2: Create the tooltip in chartGroup.
       chartGroup.call(toolTip);
