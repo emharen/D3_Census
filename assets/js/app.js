@@ -48,7 +48,7 @@ function makeResponsive(){
 
       var xLinearScale = d3.scaleBand()
       .domain(cenData.map(d => d.obesity))
-      .range([0, width])
+      .range([0, width + 10])
       .padding(0.1);
 
     // Create a linear scale for the vertical axis.
@@ -76,14 +76,14 @@ function makeResponsive(){
         .attr("y", 0)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
-        .text("Smokes");  
+        .text("Smokes (%)");  
 
         svg.append("text")
             .attr("class", "x label")
             .attr("text-anchor", "end")
             .attr("x", width)
             .attr("y", height)
-            .text("Obesity");
+            .text("Obesity (%)");
 
       var circlesGroup = chartGroup.selectAll("circle")
         .data(cenData)
@@ -115,7 +115,7 @@ function makeResponsive(){
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`<strong> ${(d.state)}<hr> Obesity: ${(d.obesity)}<br/>smokes: ${d.smokes}`);
+        return (`<strong> ${(d.state)}<hr> Obesity: ${(d.obesity)}<br/>Smokes: ${d.smokes}`);
       });
 
       // Step 2: Create the tooltip in chartGroup.
