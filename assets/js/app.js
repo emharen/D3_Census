@@ -36,7 +36,7 @@ function makeResponsive(){
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 
-  d3.csv("assets/data/data.csv").then(function(cenData) {
+  d3.csv("assets/data/data1.csv").then(function(cenData) {
 
       // parse data
       cenData.forEach(function(data) {
@@ -99,8 +99,6 @@ function makeResponsive(){
         .attr("r", 15)
         .attr("fill", "blue")
         .attr("opacity", ".5");
-
-        var fValue = (d) => {return d.state_abbr;};
 
         chartGroup.selectAll()
         .data(cenData)
