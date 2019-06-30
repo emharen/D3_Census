@@ -1,7 +1,5 @@
 # D3_Census
 
-incldes data on rates of income, obesity, poverty, etc. by state. MOE stands for "margin of error."
-
 
 Your Task
 
